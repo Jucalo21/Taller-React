@@ -24,7 +24,6 @@ const Formulario = () => {
             }
         }
             obtenerDatos();
-            //recorrer lista
     },[])
 
     const guardarPersonas = async (e)=>{
@@ -79,8 +78,10 @@ const Formulario = () => {
                     {
                     //Recorrer lista y mostrarla
                         lista.map(item=>(
-                            <li className="list-group-item" key={item.id}>{item.nombrePersona}-{item.apellidoPersona}-{item.generoPersona}
-                            -{item.fechaPersona}-{item.ciudadPersona}-{item.paisPersona}-{item.identificacionPersona}</li>
+                            <li className="list-group-item" key={item.id}>{"Nombre: "}{item.nombrePersona}-{"Apellido: "}
+                            {item.apellidoPersona}-{"Genero: "}{item.generoPersona}-{"Fecha nacimiento: "}{item.fechaPersona}
+                            -{"Ciudad Nacimiento: "}{item.ciudadPersona}-{"Pais de Nacimiento: "}{item.paisPersona}
+                            -{"CC/TI: "}{item.identificacionPersona}</li>
                         ))
                     }
                 </ul>
