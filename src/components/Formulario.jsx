@@ -153,7 +153,7 @@ const Formulario = () => {
                     //Recorrer lista y mostrarla
                         lista.map(item=>(
                             <li className="list-group-item" key={item.id}>
-                            <span className="lead">
+                            <span className="lead">{"Imagen Aleatoria: "}-{<img src='https://picsum.photos/100'></img>}
                             {"Nombre: "}{item.nombrePersona}-{"Apellido: "}
                             {item.apellidoPersona}-{"Genero: "}{item.generoPersona}-{"Fecha nacimiento: "}{item.fechaPersona}
                             -{"Ciudad Nacimiento: "}{item.ciudadPersona}-{"Pais de Nacimiento: "}{item.paisPersona}
