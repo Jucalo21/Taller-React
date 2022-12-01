@@ -1,6 +1,6 @@
-import React, {useState} from 'react'
+import React, {useState,useEffect} from 'react'
 import {db} from '../firebase'
-import {collection, doc, addDoc} from 'firebase/firestore'
+import {collection, doc, addDoc, onSnapshot, query} from 'firebase/firestore'
 
 const Formulario = () => {
 
@@ -13,9 +13,24 @@ const Formulario = () => {
     const [identificacion, setIdentificacion]=useState('')
     const [lista, setLista]=useState([])
 
+    useEffect(()=>{
+        const obtenerDatos=async()=>{
+            try{
+                await onSnapshot(collection(db,'Personas'),(query)=>{
+                    setLista(query.docs.map((doc)=> ({...doc.data(),id:doc.id})))
+                })
+            }catch(error){
+                console.log(error)
+            }
+        }
+            obtenerDatos();
+            //recorrer lista
+    },[])
+
     const guardarPersonas = async (e)=>{
         e.preventDefault()
         try{
+            //Agrega los datos a la base de datos
             const data = await addDoc(collection(db,'Personas'),{
                 nombrePersona: nombre,
                 apellidoPersona: apellido,
@@ -25,6 +40,29 @@ const Formulario = () => {
                 paisPersona: pais,
                 identificacionPersona: identificacion
             })
+
+            //Actualiza el array que se muestra en la pagina
+            setLista(
+                [...lista,{
+                    nombrePersona: nombre,
+                    apellidoPersona: apellido,
+                    generoPersona: genero,
+                    fechaPersona: fecha,
+                    ciudadPersona: ciudad,
+                    paisPersona: pais,
+                    identificacionPersona: identificacion,
+                    id:data.id
+                }]
+            )
+
+            //Limpiar
+            setNombre('')
+            setApellido('')
+            setCiudad('')
+            setFecha('')
+            setGenero('')
+            setIdentificacion('')
+            setPais('')
         }catch(error){
             console.log(error)
         }
@@ -38,12 +76,19 @@ const Formulario = () => {
             <div className="col-8">
                 <h4 className="text-center">Listado de Personas</h4>
                 <ul className="list-group">
-                    <li className="list-group-item">Persona 1</li>
-                    <li className="list-group-item">Persona 2</li>
+                    {
+                    //Recorrer lista y mostrarla
+                        lista.map(item=>(
+                            <li className="list-group-item" key={item.id}>{item.nombrePersona}-{item.apellidoPersona}-{item.generoPersona}
+                            -{item.fechaPersona}-{item.ciudadPersona}-{item.paisPersona}-{item.identificacionPersona}</li>
+                        ))
+                    }
                 </ul>
             </div>
             <div className="col-4">
                 <h4 className="text-center">Agregar Persona</h4>
+                {/*Llama a la funcion guardar personas 
+                y le envia los datos de los inputs de abajo */}
                 <form onSubmit={guardarPersonas}>
                     <input type="text" className="form-control mb-2" placeholder='Ingrese Nombre' value={nombre} onChange={(e)=>setNombre(e.target.value)}/>
                     <input type="text" className="form-control mb-2" placeholder='Ingrese Apellido' value={apellido} onChange={(e)=>setApellido(e.target.value)}/>
