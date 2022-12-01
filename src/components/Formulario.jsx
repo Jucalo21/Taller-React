@@ -48,10 +48,10 @@ const Formulario = () => {
                     <input type="text" className="form-control mb-2" placeholder='Ingrese Nombre' value={nombre} onChange={(e)=>setNombre(e.target.value)}/>
                     <input type="text" className="form-control mb-2" placeholder='Ingrese Apellido' value={apellido} onChange={(e)=>setApellido(e.target.value)}/>
                     <input type="text" className="form-control mb-2" placeholder='Ingrese Genero' value={genero} onChange={(e)=>setGenero(e.target.value)}/>
-                    <input type="text" className="form-control mb-2" placeholder='Ingrese Fecha de Nacimiento' value={fecha} onChange={(e)=>setFecha(e.target.value)}/>
+                    <input type="date" className="form-control mb-2" placeholder='Ingrese Fecha de Nacimiento' value={fecha} onChange={(e)=>setFecha(e.target.value)}/>
                     <input type="text" className="form-control mb-2" placeholder='Ingrese Ciudad de Nacimiento' value={ciudad} onChange={(e)=>setCiudad(e.target.value)}/>
                     <input type="text" className="form-control mb-2" placeholder='Ingrese Pais de Nacimiento' value={pais} onChange={(e)=>setPais(e.target.value)}/>
-                    <input type="text" className="form-control mb-2" placeholder='Ingrese CC o TI' value={identificacion} onChange={(e)=>setIdentificacion(e.target.value)}/>
+                    <input type="number" className="form-control mb-2" placeholder='Ingrese CC o TI' value={identificacion} onChange={(e)=>setIdentificacion(e.target.value)}/>
                     <button className="btn btn-primary btn-block" on='submit'>Agregar</button>
                     <button className="btn btn-dark btn-block mx-2" on='submit'>Cancelar</button>
                 </form>
