@@ -143,7 +143,7 @@ const Formulario = () => {
 
     return (
         <div className="container mt-5">
-            <h1 className="texte-center">Crud desarrollo web</h1>
+            <h1 className="texte-center">Personas</h1>
         <hr />
         <div className="row">
             <div className="col-8">
@@ -173,7 +173,12 @@ const Formulario = () => {
                 <form onSubmit={modoEdicion ? editarPersonas : guardarPersonas}>
                     <input type="text" className="form-control mb-2" placeholder='Ingrese Nombre' value={nombre} onChange={(e)=>setNombre(e.target.value)}/>
                     <input type="text" className="form-control mb-2" placeholder='Ingrese Apellido' value={apellido} onChange={(e)=>setApellido(e.target.value)}/>
-                    <input type="text" className="form-control mb-2" placeholder='Ingrese Genero' value={genero} onChange={(e)=>setGenero(e.target.value)}/>
+                    <select className="form-control mb-2" id="genero" value={genero} onChange={e=>seleccionarGenero(e)}>
+                        <option value="" name="">Seleccionar genero</option>
+                        <option value="Hombre" name="Hombre">Hombre</option>
+                        <option value="Mujer" name="Mujer">Mujer</option>
+                        <option value="Otro" name="Otro">Otro</option>
+                    </select>
                     <input type="date" className="form-control mb-2" placeholder='Ingrese Fecha de Nacimiento' value={fecha} onChange={(e)=>setFecha(e.target.value)}/>
                     <input type="text" className="form-control mb-2" placeholder='Ingrese Ciudad de Nacimiento' value={ciudad} onChange={(e)=>setCiudad(e.target.value)}/>
                     <input type="text" className="form-control mb-2" placeholder='Ingrese Pais de Nacimiento' value={pais} onChange={(e)=>setPais(e.target.value)}/>
@@ -198,6 +203,10 @@ const Formulario = () => {
         </div>
         </div>
     )
+    function seleccionarGenero(e) {
+        setGenero(e.target.value)
+    }
 }
+
 
 export default Formulario
